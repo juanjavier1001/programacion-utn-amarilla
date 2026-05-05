@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito de compras</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 30px;
+        }
+
+        .contenedor {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            background: #0d6efd;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #084298;
+        }
+
+        li {
+            background: #eee;
+            margin: 8px 0;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background: #ffcccc;
+        }
+
+        h3 {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h2>Carrito de compras</h2>
+
+        <input type="text" id="producto" placeholder="Nombre del producto">
+        <input type="number" id="precio" placeholder="Precio">
+
+        <button onclick="agregarProducto()">Agregar producto</button>
+
+        <h3>Total: $<span id="total">0</span></h3>
+
+        <ul id="listaProductos"></ul>
+    </div>
+
+    <script>
+        let total = 0;
+
+        function agregarProducto() {
+            let producto = document.getElementById("producto").value;
+            let precio = Number(document.getElementById("precio").value);
+
+            if (producto === "" || precio <= 0) {
+                alert("Complete bien los datos");
+                return;
+            }
+
+            let lista = document.getElementById("listaProductos");
+
+            let item = document.createElement("li");
+            item.textContent = producto + " - $" + precio;
+
+            item.onclick = function() {
+                total -= precio;
+                document.getElementById("total").textContent = total;
+                item.remove();
+            };
+
+            lista.appendChild(item);
+
+            total += precio;
+            document.getElementById("total").textContent = total;
+
+            document.getElementById("producto").value = "";
+            document.getElementById("precio").value = "";
+        }
+    </script>
+
+</body>
+</html>
