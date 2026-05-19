@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login </title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Verdana, sans-serif;
+      background: #eef2f7;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .caja {
+      background: white;
+      width: 90%;
+      max-width: 750px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      text-align: center;
+      color: #1f2937;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 9px 13px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-login,
+    .btn-agregar {
+      background: #16a34a;
+      color: white;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .btn-login:hover,
+    .btn-agregar:hover {
+      background: #15803d;
+    }
+
+    .btn-salir {
+      background: #dc2626;
+      color: white;
+      float: right;
+    }
+
+    .btn-mas,
+    .btn-menos {
+      background: #dbeafe;
+      color: #1e3a8a;
+      padding: 5px 9px;
+    }
+
+    .btn-borrar {
+      background: #ef4444;
+      color: white;
+      padding: 5px 9px;
+    }
+
+    .ocultar {
+      display: none;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .form-producto {
+      display: grid;
+      grid-template-columns: 1fr 120px 120px;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border-bottom: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background: #f3f4f6;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .ayuda {
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .form-producto {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="caja">
+
+    <!-- SECCION LOGIN -->
+    <div id="seccionLogin">
+      <h2>Acceso al sistema</h2>
+
+      <input type="text" id="txtUsuario" placeholder="Usuario">
+      <input type="password" id="txtClave" placeholder="Contraseña">
+
+      <button class="btn-login" onclick="login()">Ingresar</button>
+
+      <p class="ayuda">Usuario: usuario | Clave: 1111</p>
+      <p id="mensajeLogin" class="error"></p>
+    </div>
+
+    <!-- SECCION CARRITO -->
+    <div id="seccionCarrito" class="ocultar">
+      <button class="btn-salir" onclick="salir()">Cerrar sesión</button>
+      <h2>Carrito Lucas</h2>
+
+      <p>Hola, <strong id="usuarioActual"></strong></p>
+
+      <div class="form-producto">
+        <input type="text" id="txtProducto" placeholder="Nombre del producto">
+        <input type="number" id="txtPrecio" placeholder="Precio" min="1">
+        <button class="btn-agregar" onclick="agregarAlCarrito()">Agregar</button>
+      </div>
+
+      <p class="ayuda">Se pueden cargar hasta 5 productos diferentes.</p>
+      <p id="mensajeProducto" class="error"></p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cant.</th>
+            <th>Subtotal</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody id="contenidoCarrito">
+          <tr>
+            <td colspan="5">Todavía no hay productos</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="total">
+        Total: $<span id="total">0</span>
+      </div>
+    </div>
+
+  </div>
+
+<script src="./index.js"></script>
+</body>
+</html>
