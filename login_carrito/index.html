@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login y Carrito</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a, #2563eb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .contenedor {
+      width: 100%;
+      max-width: 700px;
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #1e293b;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #334155;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-principal {
+      width: 100%;
+      background: #2563eb;
+      color: white;
+      margin-top: 10px;
+    }
+
+    .btn-principal:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-salir {
+      background: #ef4444;
+      color: white;
+      float: right;
+      margin-bottom: 15px;
+    }
+
+    .btn-cantidad {
+      background: #e2e8f0;
+      color: #1e293b;
+      padding: 6px 10px;
+    }
+
+    .btn-eliminar {
+      background: #dc2626;
+      color: white;
+      padding: 6px 10px;
+    }
+
+    .oculto {
+      display: none;
+    }
+
+    .mensaje-error {
+      color: #dc2626;
+      margin-top: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .usuario {
+      margin-bottom: 15px;
+      color: #334155;
+    }
+
+    .agregar-producto {
+      display: grid;
+      grid-template-columns: 1fr 120px 120px;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: center;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .total {
+      margin-top: 20px;
+      text-align: right;
+      font-size: 20px;
+      font-weight: bold;
+      color: #1e293b;
+    }
+
+    .info {
+      margin-top: 10px;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .agregar-producto {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor">
+
+    <!-- LOGIN -->
+    <div id="login">
+      <h2>Iniciar sesión</h2>
+
+      <div class="form-group">
+        <label>Usuario</label>
+        <input type="text" id="usuario" placeholder="Ingrese usuario" />
+      </div>
+
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" id="password" placeholder="Ingrese contraseña" />
+      </div>
+
+      <button class="btn-principal" onclick="iniciarSesion()">Entrar</button>
+
+      <p class="info">Usuario: admin | Contraseña: 1234</p>
+      <p id="errorLogin" class="mensaje-error"></p>
+    </div>
+
+    <!-- CARRITO -->
+    <div id="carrito" class="oculto">
+      <button class="btn-salir" onclick="cerrarSesion()">Salir</button>
+      <h2>Carrito de compras</h2>
+      <p class="usuario">Bienvenido, <strong id="nombreUsuario"></strong></p>
+
+      <div class="agregar-producto">
+        <input type="text" id="nombreProducto" placeholder="Producto" />
+        <input type="number" id="precioProducto" placeholder="Precio" min="1" />
+        <button class="btn-principal" onclick="agregarProducto()">Agregar</button>
+      </div>
+
+      <p class="info">Máximo 5 productos distintos.</p>
+      <p id="mensajeCarrito" class="mensaje-error"></p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tablaCarrito">
+          <tr>
+            <td colspan="5">No hay productos cargados</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="total">
+        Total: $<span id="totalCarrito">0</span>
+      </div>
+    </div>
+
+  </div>
+
+ <script src="./index.js"></script>
+
+</body>
+</html>
